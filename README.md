@@ -5,6 +5,8 @@
 Just another tool to convert markdown to [Anki](https://apps.ankiweb.net/) cards.
 Partially inspired by [mdanki](https://github.com/ashlinchak/mdanki).
 
+Uses [genanki](https://github.com/kerrickstaley/genanki) and [mistune](https://github.com/lepture/mistune).
+
 :warning: This tool is mostly for my own usage. Use at your own risk.
 
 ## How to use
