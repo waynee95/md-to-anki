@@ -7,7 +7,7 @@ Partially inspired by [mdanki](https://github.com/ashlinchak/mdanki).
 
 :warning: This tool is mostly for my own usage. Use at your own risk.
 
-## Usage
+## How to use
 
 ```
 ## Question
@@ -20,6 +20,8 @@ Back
 ```
 
 Each card is separated by `---`.
+
+## Build a deck
 
 ```
 $ pip install -r requirements.txt
