@@ -13,6 +13,8 @@ markdown = mistune.create_markdown(renderer=HighlightRenderer())
 
 cardSeparator = "---"
 frontBackSeparator = "%"
+md_file_ext = (".md", ".markdown")
+media_file_ext = (".png", ".jpg", ".jpeg", ".mp3")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("input", help="either *.md file or a folder containing *.md files.")
@@ -55,18 +57,17 @@ def processMarkdownFile(file):
 def processMediaFile(file):
   media_files.append(file)
 
-# TODO: Clean this mess up
+def processFile(file):
+  if file.endswith(md_file_ext):
+    processMarkdownFile(file)
+  elif file.lower().endswith(media_file_ext):
+    processMediaFile(file)
+
 if os.path.isdir(input):
   for file in os.listdir(input):
-    if file.endswith((".md", ".markdown")):
-      processMarkdownFile(os.path.join(input, file))
-    elif file.lower().endswith((".png", ".jpg", ".jpeg", ".mp3")):
-      processMediaFile(os.path.join(input,file))
+    processFile(os.path.join(input,file))
 else:
-  if file.endswith((".md", ".markdown")):
-    processMarkdownFile(os.path.join(input, file))
-  elif file.lower().endswith((".png", ".jpg", ".jpeg", ".mp3")):
-    processMediaFile(os.path.join(input,file))
+    processFile(os.path.join(input,file))
 
 package = genanki.Package(deck)
 package.media_files = media_files
