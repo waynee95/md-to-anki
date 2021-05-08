@@ -39,6 +39,7 @@ model = genanki.Model(
 )
 
 deck = genanki.Deck(123454321, deckname)
+media_files = []
 
 def processMarkdownFile(file):
   fileContent = open(file).read()
@@ -51,11 +52,22 @@ def processMarkdownFile(file):
     note = genanki.Note(model=model, fields=[question,answer])
     deck.add_note(note)
 
+def processMediaFile(file):
+  media_files.append(file)
+
+# TODO: Clean this mess up
 if os.path.isdir(input):
   for file in os.listdir(input):
-    processMarkdownFile(os.path.join(input, file))
+    if file.endswith((".md", ".markdown")):
+      processMarkdownFile(os.path.join(input, file))
+    elif file.lower().endswith((".png", ".jpg", ".jpeg", ".mp3")):
+      processMediaFile(os.path.join(input,file))
 else:
-  processMarkdownFile(input)
+  if file.endswith((".md", ".markdown")):
+    processMarkdownFile(os.path.join(input, file))
+  elif file.lower().endswith((".png", ".jpg", ".jpeg", ".mp3")):
+    processMediaFile(os.path.join(input,file))
 
 package = genanki.Package(deck)
+package.media_files = media_files
 package.write_to_file(output)
