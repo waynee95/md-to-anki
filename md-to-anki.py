@@ -67,7 +67,7 @@ if os.path.isdir(input):
   for file in os.listdir(input):
     processFile(os.path.join(input,file))
 else:
-    processFile(os.path.join(input,file))
+    processFile(input)
 
 package = genanki.Package(deck)
 package.media_files = media_files
